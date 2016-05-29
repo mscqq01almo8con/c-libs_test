@@ -1,0 +1,208 @@
+#Q1
+
+select MOV.title  	from movie as MOV, 		 actor as ACT , 		 role AS ROLE , 		 genre as GEN , 		movie_has_genre as MHG 	where 	ACT.last_name="Allen"  		AND ACT.actor_id=ROLE.actor_id  		AND ROLE.movie_id=MOV.movie_id  		AND GEN.genre_name="Comedy" 		AND MHG.genre_id=GEN.genre_id 		AND MHG.movie_id=MOV.movie_id;
+
+
+#Q2
+
+
+
+#Q3
+#3. Βρείτε τα επώνυμα των ηθοποιών που, 
+#κατ΄ αρχάς, 
+#			παίζουν σε τουλάχιστον μια  ταινία που
+#			έχει σκηνοθετηθεί από σκηνοθέτη 
+#			με το ίδιο επώνυμο, 
+#
+#και κατά δεύτερον,
+#
+#			έχουν παίξει σε τουλάχιστον μια ταινία 
+#			με σκηνοθέτη με 
+#			διαφορετικό επώνυμο 
+#
+#			που έχει ίδιο είδος με αυτό 
+#			άλλης ταινίας που δεν παίζουν,
+#			αλλά έχει σκηνοθετήσει ο
+#			σκηνοθέτης με το ίδιο επώνυμο.
+
+#select * from results;
+
+#logika exist gia ta parakato select ???
+
+#panw orizw ton Act actor
+
+select distinct ACT.last_name 
+from actor as ACT, genre as GEN,movie as MOV
+where  exists
+(
+	select distinct ACT.last_name 
+	from  director as DIR ,
+		movie_has_director as MHD,role as ROLE
+	where MOV.movie_id=MHD.movie_id
+			and MHD.director_id=DIR.director_id
+			and ACT.actor_id=ROLE.actor_id
+			and ROLE.movie_id=MOV.movie_id
+			and ACT.last_name=DIR.last_name) 
+and exists 
+(
+	select distinct ACT.last_name 
+	from  movie as MOV1, director as DIR1 ,
+		movie_has_director as MHD1,role as ROLE1,
+		movie_has_genre as MHG1
+
+	where MOV1.movie_id=MHD1.movie_id
+			and MHD1.director_id=DIR1.director_id
+			and ACT.actor_id=ROLE1.actor_id
+			and ROLE1.movie_id=MOV1.movie_id
+			and ACT.last_name<>DIR1.last_name
+			and MOV1.movie_id=MHG1.movie_id 
+			and MHG1.genre_id=GEN.genre_id
+)
+#vres tis tainies me dedomeno genre poy paizoun ithopoioi me 
+#idio onoma me to skinotheti
+
+and exists(
+	select MOV2.movie_id
+	from director as DIR,movie as MOV2, actor as ACT2,genre as GEN2,
+	movie_has_director as MHD, movie_has_genre as MHG#
+	where GEN2.genre_name=GEN.genre_name and 
+			GEN2.genre_id=MHG.genre_id and
+			MHG.movie_id=MOV2.movie_id and
+			DIR.last_name=ACT2.last_name and
+			DIR.director_id=MHD.director_id and
+			MOV2.movie_id=MHD.movie_id and
+			Not exists (
+									select ACT2.Actor_id
+									from role as ROLE1
+									where ACT2.actor_id = ROLE1.actor_id
+										and ROLE1.movie_id=MOV2.movie_id
+								 )
+);
+
+#Q4
+/*4. Ελέγξτε αν υπάρχει ταινία είδους “Drama” που έχει γυριστεί 
+
+το 1995. (Το ερώτημα θα
+πρέπει να επιστρέφει ως απάντηση μια 
+
+σχέση με μια πλειάδα και μια στήλη με τιμή
+“yes” ή “no”.).
+Απαγορεύεται η χρήση Flow Control Operators (δηλαδή if, case, 
+
+κλπ).*/
+#moy pairnei os sosto mono to memonomeno yes
+
+(select  "yes" as Existence
+from movie as MOV , genre as GEN, movie_has_genre as MHG
+where GEN.genre_name="Drama" and MHG.genre_id=GEN.genre_id
+and MHG.movie_id=MOV.movie_id and MOV.year='1995')
+union
+(
+select  "no" as Existence 
+from movie as MOV where not exists(
+
+					select  MOV.movie_id
+					from movie as MOV , genre as GEN, movie_has_genre as MHG
+					where GEN.genre_name="Drama" and MHG.genre_id=GEN.genre_id
+					and MHG.movie_id=MOV.movie_id and MOV.year='1995'
+
+									)
+)
+#Q5 
+/*5. Βρείτε τα επώνυμα των ζευγών σκηνοθετών που έχουν συνσκηνοθετήσει την ίδια
+ταινία μεταξύ του 2000 και του 2006, εφόσον οι δύο σκηνοθέτες σχετίζονται με
+τουλάχιστον έξι διαφορετικά είδη ταινιών.
+Βεβαιωθείτε ότι κάθε ζευγάρι τυπώνεται μία φορά (δηλαδή για παράδειγμα, μόνο
+ένα από τα (β1,β2) και (β2,β1)) και ότι κάθε σκηνοθέτης δεν συνδυάζεται με τον
+εαυτό του.*/
+
+select distinct DIR2.last_name as direc1,DIR1.last_name as direc2
+from movie as MOV,director as DIR1, director as DIR2,
+		movie_has_director as MHD1,movie_has_director as MHD2
+where DIR1.director_id=MHD1.director_id and 
+		DIR2.director_id=MHD2.director_id
+		and MHD1.movie_id = MOV.movie_id 
+		and MHD2.movie_id = MOV.movie_id 
+		and DIR1.director_id<DIR2.director_id
+and MHD1.director_id<MHD2.director_id 
+and (MOV.year between 2000 and 2006) and (
+
+select COUNT(distinct GEN.genre_name)
+from movie as MOV1 ,
+	genre as GEN,movie_has_genre as MHG1,
+	movie_has_director as MHD1,movie_has_director as MHD2
+where  DIR1.director_id=MHD1.director_id and 
+		DIR2.director_id=MHD2.director_id and
+		MHD1.movie_id = MOV1.movie_id and
+		MHD2.movie_id = MOV1.movie_id 
+and DIR1.director_id<DIR2.director_id
+and MHD1.director_id<MHD2.director_id and
+GEN.genre_id=MHG1.genre_id and MHG1.movie_id=MOV1.movie_id
+
+)>=6;
+
+#Q6
+select distinct ACT.first_name as A,ACT.last_name as B,count(*) as cnt
+from actor as ACT,director as DIR
+where ACT.actor_id in (
+						select ACT.actor_id
+						from actor as ACT,role as ROL
+						where ACT.actor_id=ROL.actor_id
+						group by ROL.actor_id
+						having COUNT(*)=3
+						)
+and DIR.director_id in (select MHD.director_id
+							from movie_has_director as MHD,role as RL
+ where ACT.actor_id=RL.actor_id and MHD.movie_id=RL.movie_id
+)
+group by ACT.actor_id;
+
+
+#Q7
+/*Για κάθε ταινία που έχει ακριβώς ένα είδος, βρείτε το είδος καθώς και τον αριθμό
+των σκηνοθετών που έχουν σκηνοθετήσει αυτό το είδος.*/
+
+#na dialekso apo to MHG
+
+
+
+
+
+#arithmos skinotheton pou skinothetisan ena ergo
+select MOV.title,GENR.genre_name,COUNT(*)
+from director AS DIR,movie as MOV,movie_has_director as MHD,
+
+genre as GENR,
+movie_has_genre as MHGN
+
+where MHD.movie_id=MOV.movie_id and
+		MHD.director_id=DIR.director_id
+and MOV.title in (select MOV1.title 
+from movie as MOV1 ,movie_has_genre as MHG,genre as GEN
+where MOV1.movie_id=MHG.movie_id and MHG.genre_id=GEN.genre_id 
+group by MOV1.movie_id
+having COUNT(*)=1)
+
+ and MOV.movie_id=MHGN.movie_id
+	and MHGN.genre_id=GENR.genre_id
+
+
+
+group by MHD.movie_id;
+
+
+
+
+
+#Q8
+/*8. Βρείτε τους κωδικούς των ηθοποιών που έχουν παίξει σε όλα τα είδη ταινιών
+(ηθοποιοίχαμαιλέοντες!).*/
+select ACT.actor_id 
+from actor as ACT, role as ROl, genre as GEN, 
+	movie as MOV, movie_has_genre as MHG
+where ACT.actor_id=ROl.actor_id
+and ROL.movie_id=MOV.movie_id
+and MOV.movie_id=MHG.movie_id
+and MHG.genre_id=GEN.genre_id
+group by ACT.actor_id
+having count(*)>21

@@ -1,0 +1,11 @@
+/show_songs.slim
+
+h1= @song.title
+p Artist: #{@song.artist_name}
+p Release Date: #{@song.year}
+p <a href="/songs">back to songs index</a>
+p <a href="/songs/#{@song.id}/edit">edit this song</a>
+form action="/songs/#{@song.id}" method="POST"
+  input type="hidden" name="_method" value="DELETE"
+  input type="submit" value="delete this song"
+

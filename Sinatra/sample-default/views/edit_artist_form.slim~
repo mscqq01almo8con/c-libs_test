@@ -1,0 +1,7 @@
+/edit_artist_form.slim
+
+label for="name" The name of the Artist/Band:
+input#name type="text" name="artist2[name]" value="#{@artist2.name}"
+input#artist_pic type="checkbox" name="artist2[artist_pic]" value="#{@artist2.id}" Check if there is an available photo
+input type="submit" value="Save Artist"
+

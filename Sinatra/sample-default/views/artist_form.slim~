@@ -1,0 +1,6 @@
+/artist_form.slim
+
+label for="name" The name of the Artist/Band:
+input#name type="text" name="artist[name]" value="#{@artist.name}"
+input type="submit" value="Save Artist" id="myphoto"
+

@@ -1,0 +1,77 @@
+<html >
+			<!--A
+				multiline comment
+				!-->
+<!--
+	<head>
+
+		<div align="middle">
+			<h1>So..</h1>
+			<h2>What's Up dog?</h2>
+			<h3>All cool!</h3>
+			<title>Hello ! </title>
+		</div>
+		<meta http-equiv="refresh" content="3000" />
+	</head>
+	
+	<body bgcolor="#00FF00" align="center">
+		<div align="middle">
+			<form action="index.html" method="GET">
+				<input type="radio" name="rad" value="val1" set="on">value1</input>
+				<input type="radio" name="rad" value="val2">value2</input>
+				<input type="radio" name="rad" value="val3">value3</input>
+				<br>
+				<input type="checkbox" name="chk1" value="chk11">val1</input>
+				<br>
+				<textarea rows="20" cols="50" value="bla lah!" resizeable="no">blah blah</textarea>
+				<br>
+				<input type="submit" name="Button1" value="Ha ha!"></input>
+				<input type="submit" name="Button2" value="He heh!"></input>
+				<input type="reset" name="Res" value="Reset!"></input>
+				<input type="file" name="fileupload" accept="image/*" ></input>
+			
+			</form>
+				<h1>bla blah!</h1>
+			hi!
+			<p>This is some content, now i am writing your content, <br>
+			please read your content, this is nice content!
+			</p>
+			<br>
+			<img src="img/original.jpg" width="14px" height="20px">
+			<a href="http://www.tutorialspoint.com" target="_self">Tutorials Point</a>
+			<br>
+			<a href="http://www.tutorialspoint.com" target="_self"> 
+			 <img src="img/original.jpg" alt="Tutorials Point" border="4" /> 
+			</a>
+			<br>
+			<table border="2px" >
+				<tr><td><b>11</b></td><td>12</td><td>13</td><td>14</td></tr>		
+				<tr>		<td>21</td><td>22</td><td>23</td><td>24</td></tr>
+				<tr>		<td>31</td><td>32</td><td>33</td><td>34</td></tr>
+				<tr>		<td>41</td><td>42</td><td>43</td><td>44</td></tr>
+			</table>
+			<br>
+			<div id="menu" align="middle" >
+				<a href="index.html">HOME</a> | 
+				<a href="index.html">CONTACT</a> | 
+				<a href="index.html">ABOUT</a>
+			</div><br>
+			<frameset rows="*">
+				<frame name="aframe" src="justaframe.html" />
+			</frameset>
+			
+		</div>
+	</body>
+	-->
+	<head><title>title1</title></head>
+	<frameset cols="200, *">
+				<frame name="aframe" src="justaframe.html"/>
+				<frame name="bframe" src="justaframe.html"/>
+		</frameset>
+		<noframes>
+		<body>
+      Your browser does not support frames.
+   </body>
+   </noframes>
+	
+</html>

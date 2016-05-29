@@ -1,0 +1,11 @@
+
+h1 Songs
+/p <a href="/songs/new"> Create a new song</a>
+/p <a href="/songs/table"> See table info </a>
+- if @albums.any?
+	ul#albums
+	  -@albums.each do |album|
+	    p <a href="/albums/#{album.id}">#{album.title} </a>
+- else
+  p No albums yet!
+

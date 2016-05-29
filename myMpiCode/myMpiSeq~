@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include "mpi.h"
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <time.h>
+#define NX 5
+#define NY 10
+#define NZ 3
+#define Tsteps 20
+#define Vpow 10
+#define denominator (4+8+2)
+
+int i,j,k;
+main()
+{
+    double xy[NX][NY][NZ];
+    double z[NX][NY][NZ];
+    srand(time(NULL));
+    double start,end;
+
+    MPI_Init(NULL, NULL);
+    start=MPI_Wtime();
+
+    init_data(xy,z);
+    for(i=0;i<Tsteps;i++)
+    {
+        Horizontal_Calc(xy);
+        Vertical_Calc(z);
+    }
+
+    end=MPI_Wtime();
+
+    MPI_Finalize();
+
+    //Display time.
+    printf("\nTime:%lf",1000*(end-start));
+}
+
+//calculate horizontal motion data based on 9-point stencil
+void Horizontal_Calc(double xy[][NY][NZ]) 
+{
+    for (i=2;i<NX-2;i++) 
+    {
+        for (j=2;j<NY-2;j++) 
+        {
+	    for (k=1;k<NZ-1;k++) 
+	    {
+		xy[i][j][k]=( (4*xy[i][j][k]])+
+		xy[i-1][j][k]+xy[i-2][j][k]+xy[i][j-1][k]+xy[i][j-2][k]+
+		xy[i][j+1][k]+xy[i][j+2][k]+xy[i+1][j][k]+xy[i+2][j][k]+
+		xy[i][j][k+1]+xy[i][j][k-1])/denominator;	
+            }
+	}
+    }
+  
+}
+
+//calculate vertical visibility data based on 3-point stencil and y=pow(x,Vpow), Vpow default=10
+void Vertical_Calc(double z[][NY][NZ])
+{
+    for (i=2;i<NX-2;i++)
+    {
+        for (j=2;j<NY-2;j++)
+        {
+            z[i][j][NZ-1]=1.0;
+    	    for (k=NZ-2;k>=0;k--)
+	    {
+	        z[i][j][k]=pow( (z[i][j][k+1] * (1-0.1) ),Vpow);
+	    }
+        }
+    }
+}
+
+//set initial data for horizontal motion and vertical visibility grid points
+void initdata(xy[][NY][NZ],z[][NY][NZ])
+{
+    for(i=0;i<NX;i++)
+    {
+	for(j=0;j<NY;j++)
+	{
+	    for(k=0;i<NZ;k++)
+	    {
+		xy[i][j][k]=drand48();
+		z[i][j][k]=drand48();
+	    }
+	}
+    }
+}

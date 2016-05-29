@@ -1,0 +1,3 @@
+/p #{@artist1.name}
+/p #{@song.name}
+p #{@artist}

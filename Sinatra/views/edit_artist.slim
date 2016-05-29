@@ -1,0 +1,5 @@
+h1 Edit Artist
+form method="POST" action="/artists/#{@artist}"
+  input type="hidden" name="_method" value="PUT"
+  == slim :edit_artist_form
+

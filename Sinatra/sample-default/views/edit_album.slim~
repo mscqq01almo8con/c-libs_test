@@ -1,0 +1,5 @@
+h1 Edit Album
+form method="PUT" action="/albums/#{@album}"
+  input type="hidden" name="_method" value="PUT"
+  == slim :edit_form
+

@@ -1,0 +1,14 @@
+
+#!/usr/bin/env python
+ 
+# Long explicit way:
+result = []
+for n in range(1,8):
+    if n > 5:
+        result.append(n*100)
+print result
+# result [600, 700]
+ 
+# Concise way:
+print [n*100 for n in [1,2,3,4,5,6,7] if n > 5]
+# result [600, 700]

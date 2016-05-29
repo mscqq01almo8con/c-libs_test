@@ -1,0 +1,28 @@
+=begin
+class AllButPattern
+  Match = Struct.new(:captures)
+
+  def initialize(except)
+    @except   = except
+    @captures = Match.new([])
+  end
+
+  def match(str)
+    @captures unless @except === str
+  end
+end
+
+def all_but(pattern)
+  AllButPattern.new(pattern)
+end
+
+get all_but("/index") do
+"Anything but /index !!!"
+end
+=end
+
+class A
+get do
+1
+end
+end

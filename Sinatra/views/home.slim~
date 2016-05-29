@@ -1,0 +1,7 @@
+/home.slim
+
+p Welcome to the great albums database. 
+p Upload your Albums and your favorite artists and have fun!
+
+#img src="/images/sinatra.jpg" alt="Frank Sinatra"
+

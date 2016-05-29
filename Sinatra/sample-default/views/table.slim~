@@ -1,0 +1,9 @@
+h1 Songs Stats
+- if @songs.any?
+	ul#songs
+	  -@songs.each do |song|
+	    p <font color="red"> #{song.title} has length #{song.length/60} minutes #{song.length%60} seconds and was released on #{song.released_on}
+- else
+  p No songs have been created yet!
+
+

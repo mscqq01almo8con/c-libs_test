@@ -1,0 +1,27 @@
+	Link Information
+	-------------------------Forthnet		
+DSL Type: 	G.992.5_Annex_A
+Current Bandwidth (Up/Down) [kbps/kbps]: 	
+1021 / 10140
+Max Bandwidth
+(Up/Down) [kbps/kbps]: 	
+1133 / 11336
+Data Transferred (Sent/Received) [B/B]: 	4501589 / 34777557
+Output Power (Up/Down) [dBm]: 	12 / 20
+Line Attenuation (Up/Down) [dB]: 	19.5 / 35
+SN Margin (Up/Down) [dB]: 	11.3 / 8.9
+Loss of Framing (Local/Remote): 	0 / -
+FEC (Up/Down): 	0 / 2180
+CRC (Up/Down): 	0 / 87 
+-------------------------------------Linksys
+DSL Status: 	Connected
+DSL Modulation Mode: 	ADSL2
+DSL Path Mode: 	Interleaved
+Downstream Rate: 	8903 kbps
+Upstream Rate: 	1021 kbps
+Downstream Margin: 	8 db
+Upstream Margin: 	10 db
+Downstream Line Attenuation: 	33 db
+Upstream Line Attenuation: 	9 db
+Downstream Transmit Power: 	12 db
+Upstream Transmit Power: 	19 db

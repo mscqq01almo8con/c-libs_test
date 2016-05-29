@@ -1,0 +1,7 @@
+/no_such_artist.slim
+
+p There is no such artist as #{@asong.artist_name} in the database.
+p Please first create a record for the Artist
+
+form method="POST" action="/artist"
+  == slim :artist_form

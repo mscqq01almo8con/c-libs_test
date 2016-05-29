@@ -1,0 +1,8 @@
+/new_song.slim
+
+h1 Add A New Song
+form method="POST" action="/songs"
+  == slim :song_form
+  @song.artist_name=@artist.name
+  
+

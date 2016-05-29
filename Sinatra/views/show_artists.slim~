@@ -1,0 +1,25 @@
+/show_artists.slim
+
+h1= @ds1.get(:name)
+/picture=@ds1.get(:artist_pic)
+
+- if @ds1.get(:artist_pic)== nil
+    img src="/images/musician.jpg" alt="No Photo"
+- else
+   img src="/uploads/#{@ds1.get(:album_pic)}"
+
+- if @albums.any?
+	ul#albums
+	  -@albums.each do |album|
+	    p <a href="/albums/#{album.id}">#{album.title} </a>
+- else
+  p There are no albums from this artist/band in the database.		
+
+
+p <a href="/artists/#{@artist}/upload">Upload a photo for this artist</a>
+
+p <a href="/artists/#{@artist}/edit">edit this album</a>
+form action="/artists/#{@artist}" method="POST"
+  input type="hidden" name="_method" value="DELETE"
+  input type="submit" value="delete this artist"
+  

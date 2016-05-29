@@ -1,0 +1,9 @@
+h1 Artists
+
+p <a href="/artists/new"> Insert a new singer or band</a>
+- if @artists.any?
+	ul#artists
+	  -@artists.each do |artist|
+	    p <a href="/artists/#{artist.id}">#{artist.name} </a>
+- else
+  p No artists in database!

@@ -1,0 +1,18 @@
+/song_form.slim
+
+label for="title" Title:
+input#title type="text" name="song[title]" value="#{@song.title}"
+label for="year" Released on:
+input#year type="text" name="song[year]" value="#{@song.year}"
+label Performed by:
+
+select name="song[artist_name]" 
+  - if @artists.any?
+    ul#artists
+      -@artists.each do |@artist|
+        <option value="#{@artist_name}"> #{@artist.name}</option>
+
+input type="submit" value="Save Song"
+
+    /<form name="report_form" action="javascript:document.location=document.report_form.report.value">
+

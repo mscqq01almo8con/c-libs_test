@@ -1,0 +1,21 @@
+
+doctype html
+html lang="en"
+	head
+		title== @title || "Great Albums Database" 
+		meta charset="utf-8"
+		link rel="stylesheet" href="/styles.css"
+
+	body
+		header
+		h1 Great Albums Database
+		nav
+			ul
+				li <a href="/" title="Home">Home</a>
+				#li <a href="/about" title="About">About</a>
+				li <a href="/contact" title="Contact">Contact</a>
+				li <a href="/albums" title="Albums">Albums</a>
+				li <a href="/artists" title="Artists">Artists</a>
+				
+		section
+			==yield

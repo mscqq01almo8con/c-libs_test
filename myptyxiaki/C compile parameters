@@ -1,0 +1,1 @@
+cc -o [output name] -g [filename] gnuplot_i.o -km -pedantic -W -Wall -Wshadow

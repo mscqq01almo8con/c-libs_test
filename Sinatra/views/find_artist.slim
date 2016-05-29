@@ -1,0 +1,9 @@
+/find_artist.slim
+p Select an Artist/Band from the Database
+select value="#{@album.artist_id}" 
+  - if @artists.any?
+    ul#artists
+      -@artists.each do |artist|
+        <option name="song[artist_id]" value="#{artist.id}"> #{artist.name}</option>
+        
+input type="submit" value="Save Album"

@@ -1,0 +1,19 @@
+<html>
+
+<h1> Add A New Song</h1>
+
+<%#= slim :song_form %>
+<label for="title"> Title: </label>
+
+<input title type="text" name="<%= song[title]%>" value="<%= #{@song.title} %>"><br>
+<label for="length"> Length:</label>
+<input length type="number" name="<%= song[length] %>" value="<%= #{@song.length} %>"><br>
+<label for="released_on"> <%= Date(mm/dd/yyyy) %>:</label>
+<input released_on type="text" name="<%= song[released_on] %>" value="<%= #{@song.released_on.strftime("%m/%d/%Y") %>"><br>
+<%# end %>
+<label for="lyrics"> Lyrics: </label>
+<textarea> lyrics name="<%= song[lyrics]%>"  <%= @song.lyrics %> </textarea>
+<input type="submit" value="Save Song"><br> 
+
+ 
+</html>

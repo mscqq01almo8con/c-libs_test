@@ -1,0 +1,19 @@
+/albums.slim
+
+
+h1 Albums
+p <a href="/albums/new"> Create a new album</a>
+
+/- if @albums.any?
+/	ul#albums
+/	  -@albums.each do |album|
+/	    p <a href="/albums/#{album.id}">#{album.title} </a>
+/- else
+ / p No albums yet!
+- if @ds1.any?
+	ul#ds1
+	  -@ds1.each do |ds|
+	    p <a href="/albums/#{ds.id}">#{ds.title} </a>
+- else
+  p No albums yet!
+

@@ -1,0 +1,15 @@
+/edit_form.slim
+
+label for="title" Title:
+input#title type="text" name="album2[title]" value="#{@album2.title}"
+/label for="year" Released on:
+/input#year type="text" name="album2[year]" value="#{@album2.year}"
+label Performed by:
+
+select name="album2[artist_id]"
+    - if @artists.any?
+      ul#artists
+        -@artists.each do |artist|
+          option  value="#{artist.id}"  #{artist.name}
+
+input.button type="submit" value="Save Album"

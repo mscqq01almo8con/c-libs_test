@@ -1,0 +1,9 @@
+/album_upload.slim
+
+h1 Look in your disk for a photo of #{@artist.get(:name)}
+
+
+form method="post" enctype="multipart/form-data"
+  input type="file" name="myfile" id="mine"    
+  input type="submit" value="Upload!"
+

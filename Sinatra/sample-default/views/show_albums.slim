@@ -1,0 +1,25 @@
+/show_albums.slim
+
+h1= @ds1.get(:title)
+
+p Artist: #{@ds2.get(:name)}
+
+-if (@ds1.get(:year)==nil)
+  p Year of release not available yet
+-else
+  p Released on #{@ds1.get(:year)}
+  
+- if @ds1.get(:album_pic)== nil
+    img src="/images/musician.jpg" alt="No Photo"
+- else
+   img src="/uploads/#{@ds1.get(:album_pic)}"
+   
+p <a href="/albums/#{@album}/edit">edit this album</a>
+
+p <a href="/albums/#{@album}/upload">Upload cover photo</a>
+
+form action="/albums/#{@album}" method="POST"
+  input type="hidden" name="_method" value="DELETE"
+  input type="submit" value="delete this album"
+  
+
